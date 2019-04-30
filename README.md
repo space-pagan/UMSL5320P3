@@ -1,6 +1,33 @@
 # UMSL5320P3
 Project 3 of Genetic Algs at UMSL, written by Zoya Samsonov on April 30, 2019.
 
+
+By default, this project tries to solve the 1-0 Knapsack problem with the following parameters (W=50):
+
+| Weights | Values |
+|:-------:|:------:|
+| 1       | 18     |
+| 1       | 29     |
+| 2       | 7      |
+| 2       | 2      |
+| 3       | 6      |
+| 4       | 15     |
+| 4       | 25     |
+| 4       | 21     |
+| 4       | 14     |
+| 5       | 19     |
+| 5       | 3      |
+| 7       | 16     |
+| 7       | 28     |
+| 8       | 9      |
+| 8       | 1      |
+| 8       | 10     |
+| 9       | 17     |
+| 9       | 27     |
+| 10      | 11     |
+| 10      | 12     |
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -22,7 +49,7 @@ git clone https://github.com/space-pagan/UMSL5320P3.git
 Running driver.py will run the GA with default parameters. All parameters are
 optional and are set to default values if not provided.
 ```
-#single run using RWS, p_sample, single_point, uniform
+#single run using rank, p_sample, single_point, uniform
 driver.py
 ```
 

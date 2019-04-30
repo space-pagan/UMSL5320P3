@@ -144,13 +144,10 @@ def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='unif
         P.append(individual(None, n))
 
     while gen_count <= max_generations:
-        print('GENERATION', gen_count)
         distr(P, fdistr) #calculate distribution
         for i in P: #check if any are better than current BOR.
-            print(i)
             if i.f > best_of_run.f:
                 best_of_run = i
-        print('\n\n')
         P_next = []
         while len(P_next) < N: #build next generation
             i = mut(cross( (sample(P, fsamp), sample(P, fsamp)), fcross), fmut)
@@ -164,7 +161,7 @@ def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='unif
     return best_of_run
 
 if __name__ == "__main__":
-    dmethod = 'RWS'
+    dmethod = 'rank'
     smethod = 'p_sample'
     cmethod = 'single_point'
     mmethod = 'uniform'
@@ -188,7 +185,7 @@ if __name__ == "__main__":
             ind.evals = 0 #reset eval counter
         for i in best_of_run_data:
             print(i)
-        best_of_run_fit = [i.pure_fit for i in best_of_run_data]
+        best_of_run_fit = [i.f for i in best_of_run_data]
         print('Average of BORs is', sum(best_of_run_fit)/len(best_of_run_fit))
         print('Standard Deviation of BORs is', statistics.pstdev(best_of_run_fit))
     else:
