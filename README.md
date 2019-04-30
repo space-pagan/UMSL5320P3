@@ -1,5 +1,5 @@
-# UMSL5320P2
-Project 2 of Genetic Algs at UMSL, written by Zoya Samsonov on April 18, 2019.
+# UMSL5320P3
+Project 3 of Genetic Algs at UMSL, written by Zoya Samsonov on April 30, 2019.
 
 ## Getting Started
 
@@ -9,17 +9,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 [Python 3](https://www.python.org/downloads/release/python-373/)
 
-numpy
-```
-pip install numpy
-```
-
 ### Installing
 
 Simply clone the project to your desired directory
 
 ```
-git clone https://github.com/space-pagan/UMSL5320P2.git
+git clone https://github.com/space-pagan/UMSL5320P3.git
 ```
 
 ## Running the GA
@@ -27,7 +22,7 @@ git clone https://github.com/space-pagan/UMSL5320P2.git
 Running driver.py will run the GA with default parameters. All parameters are
 optional and are set to default values if not provided.
 ```
-#single run using RWS, p_sample, single_point, gaussian
+#single run using RWS, p_sample, single_point, uniform
 driver.py
 ```
 
@@ -59,12 +54,12 @@ The sampling method to use. Defaults to p_sample.
 The crossover method to use. Defaults to single_point.
 * 'single_point' - Crossover point randomly selected
 * 'two_point' - Two crossover points randomly selected.
-* 'arithmatic' - ax1 + (1-a)y1 where a is controlled by global variable 'weight'.
+* ~~'arithmetic'~~ - arithmetic crossover is impossible with a binary encoded GA
 
 #### mmethod
-The mutation method to use. Defaults to gaussian.
-* 'gaussian' - x = x + gaussian(0, std)
-* 'uniform' - sets x to a unifrom random value from x_min to x_max.
+The mutation method to use. Defaults to uniform.
+* ~~'gaussian'~~ - gaussian mutation is impossible with a binary encoded GA
+* 'uniform' - sets x to a random binary digit
 
 ## Authors
 

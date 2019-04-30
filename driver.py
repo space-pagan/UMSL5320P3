@@ -1,5 +1,5 @@
 '''
-Created on April 18, 2019
+Created on April 30, 2019
 
 @author: Zoya Samsonov
 '''
@@ -17,20 +17,20 @@ import sys
 #Population size:
 N = 10
 #value bounds:
-x_min = -1.0
-x_max = 5.0
-n = 3
+x_min = 0
+x_max = 1
+n = 20
+ind.W = 50
+ind.weights = [1,1,2,2,3,4,4,4,4,5,5,7,7,8,8,8,9,9,10,10]
+ind.kvalues = [18,29,7,2,6,15,25,21,14,19,3,16,28,9,1,10,17,27,11,12]
 #crossover:
 Pc = 0.8
 #mutation:
-Pm = 0.1
-std = 0.02
+Pm = 0.05
 #ranking minimum expectation:
 rank_min = 0.1
 #truncate n elements:
 loss = 2
-#arithmetic weight:
-weight = 0.3
 #other:
 max_generations = 50
 
@@ -85,7 +85,6 @@ def cross(P, method):
     Strings that will be parsed:
         'single_point' - Crossover point randomly selected
         'two_point' - Two crossover points randomly selected.
-        'arithmatic' - ax1 + (1-a)y1 where a is controlled by weight.
     
     Arguments:
         P {'individual' tuple} -- Two 'individual' objects passed as a tuple.
@@ -100,8 +99,6 @@ def cross(P, method):
         return cm.single_point(P, n, Pc)
     elif method == 'two_point':
         return cm.two_point(P, n, Pc)
-    elif method == 'arithmatic':
-        return cm.arithmatic(P, n, Pc, weight)
     else:
         return None
 
@@ -109,7 +106,6 @@ def mut(P, method):
     '''Selects different mutation methods to apply to the population, P.
     All mutation methods have a Pm rate of success, and return None otherwise.
     Strings that will be parsed:
-        'gaussian' - x = x + gaussian(0, std)
         'uniform' - sets x to a unifrom random value from x_min to x_max.
     
     Arguments:
@@ -121,14 +117,12 @@ def mut(P, method):
             mutation method.
     '''
 
-    if method == 'gaussian':
-        return mm.gaussian(P, Pm, std, x_min, x_max)
-    elif method == 'uniform':
+    if method == 'uniform':
         return mm.uniform(P, Pm, x_min, x_max)
     else:
         return None
 
-def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='gaussian'):
+def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='uniform'):
     '''Driver for a single run of the GA. Genetic manipulation methods can be
         left blank or supplied for varying outcomes.
     
@@ -136,24 +130,27 @@ def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='gaus
         fdistr {str} -- RWS or distribution method if provided.
         fsamp {str} -- Proportional or sampling method if provided.
         fcross {str} -- Single-Point or crossover method if provided.
-        fmut {str} -- Gaussian or mutation method if provided.
+        fmut {str} -- Uniform or mutation method if provided.
     
     Returns:
         'individual' object -- The best-of-run individual.
     '''
 
     #initialize
-    best_of_run = individual([x_max, x_max, x_max]) #start with worst
+    best_of_run = individual([0]*n) #start with worst
     gen_count = 1
     P = []
     while len(P) < N:
-        P.append(individual(None, n, x_min, x_max))
+        P.append(individual(None, n))
 
-    while gen_count < max_generations:
+    while gen_count <= max_generations:
+        print('GENERATION', gen_count)
         distr(P, fdistr) #calculate distribution
         for i in P: #check if any are better than current BOR.
+            print(i)
             if i.f > best_of_run.f:
                 best_of_run = i
+        print('\n\n')
         P_next = []
         while len(P_next) < N: #build next generation
             i = mut(cross( (sample(P, fsamp), sample(P, fsamp)), fcross), fmut)
@@ -170,8 +167,9 @@ if __name__ == "__main__":
     dmethod = 'RWS'
     smethod = 'p_sample'
     cmethod = 'single_point'
-    mmethod = 'gaussian'
-    mutli_run = 0
+    mmethod = 'uniform'
+    multi_run = 0
+
     if len(sys.argv) > 1:
         multi_run = int(sys.argv[1])
     if len(sys.argv) > 2:
@@ -196,3 +194,4 @@ if __name__ == "__main__":
     else:
         bor = single_run(dmethod, smethod, cmethod, mmethod)
         print('Best individual in run is', bor)
+    print('Best possible solution is', '[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0]\tw: 50\tv: 221\tf: 4.420')

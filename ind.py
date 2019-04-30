@@ -1,5 +1,5 @@
 '''
-Created on April 18, 2019
+Created on April 30, 2019
 
 @author: Zoya Samsonov
 '''
@@ -7,49 +7,45 @@ Created on April 18, 2019
 import random as r
 
 class individual:
-    '''Implements an individual in a genetic algorithm
+    '''Implements an individual in a genetic algorithm using binary coding
     
     Arguments:
-        values {numerical interable} -- Initial values for the individual.
-        If None, provide the desired value list length, minimum, and maximum, in that order.
-        Ex: individual([1, 2, 3]) or individual(None, 3, 1, 3)
+        values {binary interable} -- Initial values for the individual.
+        If None, provide the desired value list length.
+        Ex: individual([1, 0, 1]) or individual(None, 3)
     '''
-    def __init__(self, values, *params):
-        #params should be (x_len, x_min, x_max)
+    def __init__(self, values, *args):
+        #params should be (x_len)
         if values == None:
             values = []
-            for _ in range(params[0]):
-                values.append(r.uniform(params[1], params[2]))
+            for _ in range(args[0]):
+                values.append(r.choice([0,1]))
 
         self.values = values
-        self.__f = None
         self.p = 0
-        self.pure_fit = pure_fitness(values)
+        self.w = self.v = self.__f = 0
 
     @property
     def f(self):
-        if self.__f == None:
-            self.__f = fitness(self.values)
+        if self.__f:
+            return self.__f
+        self.w, self.v, self.__f = fitness(self.values)
         return self.__f
 
     def __repr__(self):
-        return str(['%5.3f' % s for s in self.values]) + '\t'+'%5.3f' % self.pure_fit
+        return str(self.values) + '\tw: '+str(self.w)+'\tv: '+str(self.v)+'\tf: '+'%5.3f' % self.f
 
-epsilon = 0.000000000000001
 evals = 0
+weights = []
+kvalues = []
+W = 0
 
-def pure_fitness(values):
-    '''Calculates the absolute fitness function.
-    
-    Arguments:
-        values {numerical iterable} -- The geneone of the individual for which
-            to compute a fitness.
-    
-    Returns:
-        float -- The fitness value
-    '''
-
-    return sum([x**2 for x in values])
+def penalty(weight):
+    if weight > W:
+        dif = weight - W
+        return 2**dif
+    else:
+        return 0
 
 def fitness(values):
     '''Calculates an adjusted fitness value such that if minimizing,
@@ -65,4 +61,15 @@ def fitness(values):
 
     global evals
     evals += 1
-    return (1+epsilon)/(pure_fitness(values)+epsilon) #to avoid 1/0
+
+    wtotal = 0
+    vtotal = 0
+    
+    for i, j in enumerate(values):
+        if j:
+            wtotal += weights[i]
+            vtotal += kvalues[i]
+
+    w2 = wtotal + penalty(wtotal)
+    w2 = W if w2 < W else w2 #there should be no benefit for not including the entire weight
+    return wtotal, vtotal, vtotal / w2 #maximize values, minimize weight

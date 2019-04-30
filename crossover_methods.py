@@ -1,5 +1,5 @@
 '''
-Created on April 18, 2019
+Created on April 30, 2019
 
 @author: Zoya Samsonov
 '''
@@ -56,25 +56,3 @@ def two_point(Parents, n, Pc):
                 child_values.append(Parents[0].values[i])
         return individual(child_values)
     return None #regenerate parent pair
-
-def arithmatic(Parents, n, Pc, weight):
-    '''Arithmatic crossover. Each gene is calculated as ax[i] + (1-a)y[i].
-    
-    Arguments:
-        Parents {2-tuple of class 'individual'} -- The parents.
-        n {int} -- The genome length
-        Pc {float} -- The rate of success as a decimal propbability.
-        weight {float} -- The weight that the first parent's genes have.
-            0.5 will result in each parent contributing equally.
-    
-    Returns:
-        'individual' object -- The child, or None.
-    '''
-
-    if r.random() < Pc:
-        child_values = []
-        for i in range(n):
-            child_values.append( (weight * Parents[0].values[i]) + \
-                ((1-weight) * Parents[1].values[i]) )
-        return individual(child_values)
-    return None
