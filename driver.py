@@ -157,7 +157,7 @@ def single_run(fdistr='RWS', fsamp='p_sample', fcross='single_point', fmut='unif
         gen_count += 1
         P = P_next
 
-    print('Total evaluations:', ind.evals)
+    print('Total evaluations for run:', ind.evals)
     return best_of_run
 
 if __name__ == "__main__":
@@ -191,4 +191,5 @@ if __name__ == "__main__":
     else:
         bor = single_run(dmethod, smethod, cmethod, mmethod)
         print('Best individual in run is', bor)
-    print('Best possible solution is', '[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0]\tw: 50\tv: 221\tf: 4.420')
+    print('Best possible solution is:')
+    print('[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0]\tw: 50\tv: 221\tf: 4.420')

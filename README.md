@@ -4,28 +4,31 @@ Project 3 of Genetic Algs at UMSL, written by Zoya Samsonov on April 30, 2019.
 
 By default, this project tries to solve the 1-0 Knapsack problem with the following parameters (W=50):
 
-| Weights | Values |
-|:-------:|:------:|
-| 1       | 18     |
-| 1       | 29     |
-| 2       | 7      |
-| 2       | 2      |
-| 3       | 6      |
-| 4       | 15     |
-| 4       | 25     |
-| 4       | 21     |
-| 4       | 14     |
-| 5       | 19     |
-| 5       | 3      |
-| 7       | 16     |
-| 7       | 28     |
-| 8       | 9      |
-| 8       | 1      |
-| 8       | 10     |
-| 9       | 17     |
-| 9       | 27     |
-| 10      | 11     |
-| 10      | 12     |
+[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0]
+| Weights | Values | Best Possible |
+|:-------:|:------:|:-------------:|
+| 1       | 18     | 1             |
+| 1       | 29     | 1             |
+| 2       | 7      | 1             |
+| 2       | 2      | 1             |
+| 3       | 6      | 0             |
+| 4       | 15     | 1             |
+| 4       | 25     | 1             |
+| 4       | 21     | 1             |
+| 4       | 14     | 1             |
+| 5       | 19     | 1             |
+| 5       | 3      | 0             |
+| 7       | 16     | 1             |
+| 7       | 28     | 1             |
+| 8       | 9      | 0             |
+| 8       | 1      | 0             |
+| 8       | 10     | 0             |
+| 9       | 17     | 0             |
+| 9       | 27     | 1             |
+| 10      | 11     | 0             |
+| 10      | 12     | 0             |
+
+The best possible solution has a total weight of 50 and a total value of 221 per the above chart.
 
 
 ## Getting Started
