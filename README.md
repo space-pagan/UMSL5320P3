@@ -4,7 +4,6 @@ Project 3 of Genetic Algs at UMSL, written by Zoya Samsonov on April 30, 2019.
 
 By default, this project tries to solve the 1-0 Knapsack problem with the following parameters (W=50):
 
-[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0]
 | Weights | Values | Best Possible |
 |:-------:|:------:|:-------------:|
 | 1       | 18     | 1             |
