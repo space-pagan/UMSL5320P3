@@ -1,5 +1,5 @@
-# UMSL5320P3
-Project 3 of Genetic Algs at UMSL, written by Zoya Samsonov on April 30, 2019.
+# P3
+Project 3 of [REDACTED], written by Zoya Samsonov on April 30, 2019.
 
 
 By default, this project tries to solve the 1-0 Knapsack problem with the following parameters (W=50):
