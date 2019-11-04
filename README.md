@@ -43,7 +43,7 @@ These instructions will get you a copy of the project up and running on your loc
 Simply clone the project to your desired directory
 
 ```
-git clone https://github.com/space-pagan/UMSL5320P3.git
+git clone https://github.com/space-pagan/EVOP3.git
 ```
 
 ## Running the GA
